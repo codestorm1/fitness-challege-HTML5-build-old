@@ -1,0 +1,259 @@
+<!doctype html>
+<html class="no-js ui-mobile-rendering" lang="en">
+<head>
+    <title>Fitness Challenge</title>
+    <meta name="description" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--<link rel="stylesheet" href="/css/jquery.mobile-1.2.0.min.css" />-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+    <link rel="stylesheet" href="css/fitness.css">
+
+    <!--<script src="js/libs/underscore-1.4.1-min.js"></script>-->
+    <!--<script src="js/libs/json2-min.js"></script>-->
+    <!--<script src="js/libs/jquery-1.8.2.min.js"></script>-->
+    <!--<script src="js/libs/jquery.mobile-1.2.0.min.js"></script>-->
+    <!--<script src="js/libs/backbone-0.9.2-min.js"></script>-->
+    <!--<script src="js/libs/stackmob-js-0.8.0-min.js"></script>-->
+    <!--<script src="js/libs/mustache.js"></script>-->
+<!--<script type="text/javascript">-->
+    <!--var define = function(crap, fn) {-->
+        <!--fn();-->
+    <!--};-->
+<!--</script>-->
+
+    <!--<script src="js/stackmobInit.js"></script>-->
+    <!--<script src="js/models/ChallengeModel.js"></script>-->
+    <!--<script src="js/models/HomeModel.js"></script>-->
+    <!--<script src="js/models/InviteModel.js"></script>-->
+    <!--<script src="js/models/UserModel.js"></script>-->
+    <!--<script src="js/views/AuthView.js"></script>-->
+    <!--<script src="js/views/ChallengeView.js"></script>-->
+    <!--<script src="js/views/FooterView.js"></script>-->
+    <!--<script src="js/views/FriendsView.js"></script>-->
+    <!--<script src="js/views/HomeView.js"></script>-->
+    <!--<script src="js/views/LoginView.js"></script>-->
+    <!--<script src="js/views/ProfileView.js"></script>-->
+    <!--<script src="js/views/RegisterView.js"></script>-->
+    <!--<script src="js/routers/FitnessRouter.js"></script>-->
+    <!--<script src="js/customCodeClient.js"></script>-->
+    <!--<script src="js/fitness.js"></script>-->
+
+
+    <script src="js/libs/require.js" data-main="js/main"></script>
+
+
+</head>
+<body>
+
+<script id="header_template" type="text/template">
+    <div data-role="header" data-theme="j">
+        <a href='#' class='ui-btn-left' data-icon='arrow-l' data-theme="b" data-ajax="false">Back</a>
+        <h1 class="ir logo">Fitness Challenge</h1>
+        <a href="#home" data-icon="home" data-role="button" data-theme="b" class="home_button" data-ajax="false">Home</a>
+    </div>
+</script>
+
+<div id="home" data-role="page" data-title="Fitness Challenge">
+</div>
+
+<div id="profile" data-role="page" data-title="Your Profile
+">
+</div>
+
+<div id="login" data-role="page" data-title="Fitness Challenge - Login">
+</div>
+
+<div id="create" data-role="page" data-title="Create Challenge">
+</div>
+
+<div id="friends" data-role="page" data-title="Your Friends">
+</div>
+
+<div id="auth" data-role="page" data-title="Authorize with Fitbit">
+</div>
+
+<div id="register" data-role="page" data-title="Fitness Challenge - Register">
+</div>
+
+<script id="home_template" type="text/template">
+    <!-- TODO: get jqm to style the div below, instead of manually adding the classes -->
+    <div data-role="header" data-theme="j" class="ui-header ui-bar-a ui-bar-j" role="banner">
+        <h1 class="ir logo ui-title" role="heading" aria-level="1">Fitness Challenge</h1>
+    </div>
+    <div data-role="content">
+        <ul data-role="listview" data-inset="true" class="home_links" data-checknew="true">
+            <li class="profile">
+                <a href="#profile">My Profile</a>
+            </li>
+            <li class="challenges">
+                <a href="#challenges">Active Challenges</a>
+            </li>
+            <li class="invitations">
+                <a href="#invitations">
+                    Invitations<span class="message-status message-status-hidden ui-icon ui-icon-custom icon-email"></span>
+                </a>
+            </li>
+            <li class="create">
+                <a href="#create">
+                    Create A New Challenge<span class="message-status message-status-hidden ui-icon ui-icon-custom icon-email"></span>
+                </a>
+            </li>
+            <li class="history">
+                <a href="#challenge_history">Challenge History</a>
+            </li>
+            <li class="friends">
+                <a href="#friends">
+                    Friends<span class="message-status message-status-hidden ui-icon ui-icon-custom icon-email"></span>
+                </a>
+            </li>
+        </ul>
+
+        <!--<h2>Select a Category Below:</h2>-->
+        <!--<ul data-role="listview" data-inset="true">-->
+            <!--<li><a href="#category?animals" class="animals">Animals</a></li>-->
+            <!--<li><a href="#category?colors" class="colors">Colors</a></li>-->
+            <!--<li><a href="#category?vehicles" class="vehicles">Vehicles</a></li>-->
+        <!--</ul>-->
+    </div><!-- /content -->
+    <div class="footer"></div>
+</script>
+
+<script id="friends_template" type="text/template">
+    <div data-role="content">
+        <h2>Your Friends</h2>
+        {{#friends}}
+        <h3><img src="{{ avatar }}" class="friend_avatar"> {{ display_name }} {{ username }}</h3>
+        {{/friends}}
+        {{^friends}}
+        <h3>You have no friend who have registered with Fitness Challenge</h3>
+        {{/friends}}
+    </div>
+    <div class="footer"></div>
+</script>
+
+<script id="profile_template" type="text/template">
+    <div data-role="content">
+        <fieldset>
+            <h2>Profile</h2>
+            {{#username}}
+                <h3><img id="avatar" src="{{avatar}}"> Logged in as {{ displayname }}</h3>
+                <h3>Your fitness challenge ID is {{ username }}, Your Fitbit ID is  {{ fitbitUserID }}</h3>
+                <h3>Email: {{ email }}, Password: {{ fc_password }}</h3>
+            {{#accessToken}}
+                <h3>You are currently authenticated with Fitbit</h3>
+                <h3>Fitbit Access Token: {{ accessToken }}</h3>
+                <a id="deauthorize" type="button" data-theme="e">Clear Fitbit authorization</a>
+            {{/accessToken}}
+            {{^accessToken}}
+                <h3>You are not authenticated with Fitbit</h3>
+                <a href="#auth" type="button" data-theme="e">Go to auth page</a>
+            {{/accessToken}}
+                <a id="delete_user" type="button" data-theme="e">Delete My Account</a>
+            {{/username}}
+            {{^username}}
+                <h3>You are not logged in</h3>
+                <a id="go_to_login" href="#login" type="button" data-theme="e">Go to Login</a>
+            {{/username}}
+        </fieldset>
+    </div>
+    <div class="footer"></div>
+</script>
+
+
+<script id="login_template" type="text/template">
+    <div data-role="content">
+        <h3>Welcome to fitness challenge!<br/>
+            Challenge your friends to see who can take the most fitbit steps.</h3>
+            <fieldset>
+                <!--<legend>Login</legend>-->
+                <h3>Login:</h3>
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocapitalize="off" autocorrect="off" data-val="true" data-val-required="Email required" data-val-length="The field Email must be a string with a maximum length of 256." data-val-length-max="256" data-val-regex="Invalid Email Address" data-val-regex-pattern="^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$"/>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="on" data-val="true" data-val-length="The field Password must be a string with a minimum length of 4 and a maximum length of 16." data-val-length-max="16" data-val-length-min="4" data-val-required="Password required"/>
+                <input id="remember_me" class="remember_me" name="remember_me" type="checkbox" checked="checked" data-val="true" data-val-required="The Remember me field is required."  />
+                <label class="long" for="remember_me">Remember me</label>
+                <a type="button" data-theme="b" id="login_submit">Log In</a>
+            </fieldset>
+            <a href="#register" id="register_link" data-role="button" data-theme="e" data-ajax="false">Not a Member? Register now</a>
+        <!--</form>-->
+    </div>
+    <div class="footer"></div>
+</script>
+
+
+<script id="register_template" type="text/template">
+    <div data-role="content">
+            <fieldset>
+                <h3>Register</h3>
+                <label for="register_email">Email</label>
+                <input id="register_email" name="Email" type="email" autocapitalize="off" autocorrect="off" data-val="true" data-val-length="The field Email must be a string with a maximum length of 256." data-val-length-max="256" data-val-regex="Invalid Email Address" data-val-regex-pattern="^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$" data-val-required="Email required"/>
+
+                <label for="new_password">Password</label>
+                <input id="new_password" name="new_password" type="password" data-val="true" data-val-length="The field Password must be a string with a minimum length of 4 and a maximum length of 16." data-val-length-max="16" data-val-length-min="4" data-val-required="Password required" />
+                <label for="confirm_password">Confirm&nbsp;Password</label>
+                <input  id="confirm_password" name="confirm_password" type="password"data-val="true" data-val-length="The field Password must be a string with a minimum length of 4 and a maximum length of 16." data-val-length-max="16" data-val-length-min="4" data-val-required="Password required"/>
+                <h4>Hey, don't forget your password, there's no way to recover it yet :P</h4>
+                <a id="register_submit" type="button" data-theme="e">Register</a>
+            </fieldset>
+        <!--</form>-->
+    </div>
+    <div class="footer"></div>
+</script>
+
+<script id="auth_template" type="text/template">
+    <div data-role="content">
+        <h3>Thank you for registering!</h3>
+        <p>We're almost done!<br/>
+            You just need to git fitbit permission to allow us to read your activities<br/>
+            Click or tap the link below<br/>
+            Fitbit will ask you to log in and grant permission<br/>
+        </p>
+        <a id="authorize_link" data-role="button" data-theme="e" data-ajax="false">Authorize with Fitbit</a>
+    </div>
+    <div class="footer"></div>
+</script>
+
+<script id="create_challenge_template" type="text/template">
+    <div data-role="content">
+        <form action="/" data-ajax="false" id="create_challenge_form" method="post">
+            <fieldset>
+                <h3>Create a new challenge</h3>
+                <label for="challenge_type">Type of challenge</label>
+                <select id="challenge_type">
+                    <option value="steps_date_range">Steps taken in a set date range</option>
+                </select>
+
+                <label for="start_date">Start date</label>
+                <input id="start_date" name="start_date" type="date" data-val="true" data-val-required="Start date is required" />
+                <label for="end_date">End date</label>
+                <input id="end_date" name="end_date" type="date" data-val="true" data-val-required="End date is required" />
+
+                <a id="create_challenge_submit" type="button" data-theme="e">Create</a>
+            </fieldset>
+        </form>
+    </div>
+    <div class="footer"></div>
+</script>
+
+<script id="footer_template" type="text/template">
+    <footer data-role="footer" class="main-footer" data-theme="c">
+        <div data-role="navbar">
+            <ul>
+                <li><a class="logout_link">Log Out</a></li>
+            </ul>
+        </div>
+
+        <ul class="footer-links">
+            <li><a href="#contact_us">Contact Us</a></li>
+            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#terms_and_conditions">Terms of Service</a></li>
+        </ul>
+        <p>Copyright &copy; 2013 Bryan Green. <span class="no-br">All rights reserved.</span></p>
+    </footer>
+</script>
+
+</body>
+</html>
