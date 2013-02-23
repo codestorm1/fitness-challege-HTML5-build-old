@@ -25,23 +25,6 @@ index_2.css
 
 ../webapp-build/js/main.js
 ----------------
-js/libs/jquery-1.8.2.min.js
 js/libs/underscore-1.4.1-min.js
-js/libs/backbone-0.9.2-min.js
-js/libs/stackmob-js-0.8.0-min.js
-/Users/bryan/projects/fitnessChallenge/web/js/stackmobinit.js
-/Users/bryan/projects/fitnessChallenge/web/js/fitness.js
-/Users/bryan/projects/fitnessChallenge/web/js/customCodeClient.js
-/Users/bryan/projects/fitnessChallenge/web/js/models/ChallengeModel.js
-/Users/bryan/projects/fitnessChallenge/web/js/views/FooterView.js
 js/libs/mustache.js
-/Users/bryan/projects/fitnessChallenge/web/js/views/HomeView.js
-/Users/bryan/projects/fitnessChallenge/web/js/views/FriendsView.js
-/Users/bryan/projects/fitnessChallenge/web/js/views/LoginView.js
-/Users/bryan/projects/fitnessChallenge/web/js/views/RegisterView.js
-/Users/bryan/projects/fitnessChallenge/web/js/views/ProfileView.js
-/Users/bryan/projects/fitnessChallenge/web/js/views/AuthView.js
-/Users/bryan/projects/fitnessChallenge/web/js/views/ChallengeView.js
-js/libs/jquery.mobile-1.2.0.min.js
-/Users/bryan/projects/fitnessChallenge/web/js/routers/FitnessRouter.js
 ../webapp-build/js/main.js
